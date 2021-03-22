@@ -47,7 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServer.ContainedLanguage
             _joinableTaskContext = joinableTaskContext;
             _fileUriProvider = fileUriProvider;
             _documentFactory = documentFactory;
-            _documents = new ConcurrentDictionary<Uri, LSPDocument>();
+            _documents = new ConcurrentDictionary<Uri, LSPDocument>(UriEqualityComparer.Instance);
 
             foreach (var trigger in changeTriggers)
             {

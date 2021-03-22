@@ -31,7 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServer.ContainedLanguage
             }
 
             _fileUriProvider = fileUriProvider;
-            _virtualDocumentContexts = new Dictionary<Uri, DocumentContext>();
+            _virtualDocumentContexts = new Dictionary<Uri, DocumentContext>(UriEqualityComparer.Instance);
         }
 
         public override void Initialize(LSPDocumentManager documentManager)

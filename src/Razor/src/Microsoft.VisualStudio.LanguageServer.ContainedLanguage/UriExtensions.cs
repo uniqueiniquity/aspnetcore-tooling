@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Microsoft.VisualStudio.LanguageServer.ContainedLanguage
@@ -24,5 +25,18 @@ namespace Microsoft.VisualStudio.LanguageServer.ContainedLanguage
             // Absolute paths are usually encoded.
             return WebUtility.UrlDecode(uri.AbsolutePath);
         }
+    }
+
+    public sealed class UriEqualityComparer : IEqualityComparer<Uri>
+    {
+        public static readonly UriEqualityComparer Instance = new UriEqualityComparer();
+
+        private UriEqualityComparer()
+        {
+        }
+
+        bool IEqualityComparer<Uri>.Equals(Uri x, Uri y) => x.Equals(y);
+
+        int IEqualityComparer<Uri>.GetHashCode(Uri obj) => obj.GetHashCode();
     }
 }
